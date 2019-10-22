@@ -33,7 +33,11 @@ const CreateDeck = () => {
     }
   }
 
-  return <div></div>
+  return (
+    <>
+      <div></div>
+    </>
+  )
 }
 
 export default CreateDeck

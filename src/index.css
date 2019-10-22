@@ -9,4 +9,76 @@ html {
 body {
   margin: 0;
   min-height: 100%;
+  /* display: flex;
+  justify-content: center; */
+  /* align-items: center; */
+}
+img {
+  width: 17%;
+  height: auto;
+  display: flex;
+  align-self: center;
+}
+.top-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.blackjack {
+  display: flex;
+  align-self: center;
+  font-size: 2rem;
+  padding: 1rem;
+}
+.deck-buttons-section {
+  display: flex;
+  align-self: center;
+  padding: 2rem;
+}
+.all-players-section {
+  display: flex;
+  justify-content: center;
+  /* padding: 15%; */
+}
+.player {
+  padding: 10%;
+}
+.button {
+  padding: 1rem;
+}
+
+.hit-stand-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+}
+
+/* .shuffle-deck-button {    //not working as expected
+  margin: 1%;
+}
+.deal-cards-button {        //not working as expected
+  margin: 1%;
+} */
+
+.hit-button {
+  margin: 1%;
+}
+.stand-button {
+  margin: 1%;
+}
+
+/* .player-house-section {
+} */
+
+footer {
+  position: absolute;
+  bottom: 0%;
+  left: 33.5%;
+  /* display: flex;
+  justify-content: center; */
+}
+.footer-p {
+  display: flex;
+  align-self: center;
 }
