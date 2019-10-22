@@ -1,7 +1,15 @@
 import React, { Component, useState } from "react"
+import ShuffleDeck from "./components/ShuffleDeck"
 
 const App = () => {
   const [deck, setDeck] = useState([])
+  const [userHandOne, setUserHandOne] = useState([])
+  const [userHandTwo, setUserHandTwo] = useState([])
+  const [houseHand, setHouseHand] = useState([])
+
+  const [handOneTotal, setHandOneTotal] = useState(0)
+  const [handTwoTotal, setHandTwoTotal] = useState(0)
+  const [houseTotal, setHouseTotal] = useState(0)
 
   const createDeck = () => {
     const deck = []
@@ -36,16 +44,43 @@ const App = () => {
     setDeck(deck)
   }
 
+  const ShuffleDeck = () => {
+    const shuffleDeck = () => {
+      for (let i = 0; i < deck.length; i++) {
+        //now gen a floored num
+        //then swap deck[i] with deck[rando]
+        let randomNum = Math.floor(Math.random() * i + 1)
+        let temp = deck[i]
+        deck[i] = deck[randomNum]
+        deck[randomNum] = temp
+        // console.log("deck[i] =>", deck[i]);
+        // console.log(randomNum);
+      }
+      console.log(deck)
+    }
+  }
+
+  useEffect(() => {
+    createDeck()
+    ShuffleDeck()
+  }, [])
+
+  // setup useEffect that calls create deck and other functions upon page load
   return (
     <div>
       <>
         <main>
           <section class='top-section'>
             <h1 class='blackjack'>Blackjack</h1>
-            <img src='\assets\background\black_card.jpeg' />
+            <img src='.\assets\background\black_card.jpeg' />
 
             <section class='deck-buttons-section'>
-              <button class='shuffle-deck-button button'>Shuffle Deck</button>
+              <button
+                class='shuffle-deck-button button'
+                onClick={() => ShuffleDeck()}
+              >
+                Shuffle Deck
+              </button>
               <button class='deal-cards-button button'>Deal Cards</button>
             </section>
 
