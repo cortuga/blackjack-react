@@ -73,7 +73,7 @@ img {
 
 footer {
   position: absolute;
-  bottom: 0%;
+/*   ! bottom: 0%; */
   left: 33.5%;
   /* display: flex;
   justify-content: center; */
