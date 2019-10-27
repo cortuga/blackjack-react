@@ -72,7 +72,7 @@ const App = () => {
         <main>
           <section class='top-section'>
             <h1 class='blackjack'>Blackjack</h1>
-            <img src='.\assets\background\black_card.jpeg' />
+            <img alt='something' src='.\assets\background\black_card.jpeg' />
 
             <section class='deck-buttons-section'>
               <button
