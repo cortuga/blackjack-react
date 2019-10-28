@@ -12,7 +12,7 @@ const App = () => {
   const [houseTotal, setHouseTotal] = useState(0)
 
   const createDeck = () => {
-    const deck = []
+    // const deck = []
     const suits = ["hearts", "clubs", "spades", "diamonds"]
     const values = [
       { name: "ace", value: 11 },
@@ -39,13 +39,12 @@ const App = () => {
           number: value.value
         })
       }
-      // console.log(deck);
     }
     setDeck(deck)
+    console.log("Deck Created", deck);
   }
 
   const ShuffleDeck = () => {
-    const shuffleDeck = () => {
       for (let i = 0; i < deck.length; i++) {
         //now gen a floored num
         //then swap deck[i] with deck[rando]
@@ -56,13 +55,29 @@ const App = () => {
         // console.log("deck[i] =>", deck[i]);
         // console.log(randomNum);
       }
-      console.log(deck)
-    }
+      console.log("Deck Shuffled", deck)
+  }
+
+  const DealCards = () => {
+      for (let i = 0; i < 2; i++) {
+        userHandOne.push(deck[i])
+        deck.pop(deck[i])
+        userHandTwo.push(deck[i + 2])
+        deck.pop(deck[i + 2])
+        houseHand.push(deck[i + 4])
+        deck.pop(deck[i + 4])
+      }
+      setUserHandOne(userHandOne)
+      setUserHandTwo(userHandTwo)
+      setHouseHand(houseHand)
+      console.log("User Hand 1", userHandOne)
+      console.log("User Hand 2", userHandTwo)
+      console.log("House Hand", houseHand)
   }
 
   useEffect(() => {
     createDeck()
-    ShuffleDeck()
+    // ShuffleDeck()
   }, [])
 
   // setup useEffect that calls create deck and other functions upon page load
@@ -70,66 +85,68 @@ const App = () => {
     <div>
       <>
         <main>
-          <section class='top-section'>
-            <h1 class='blackjack'>Blackjack</h1>
+          <section className='top-section'>
+            <h1 className='blackjack'>Blackjack</h1>
             <img alt='something' src='.\assets\background\black_card.jpeg' />
 
-            <section class='deck-buttons-section'>
+            <section className='deck-buttons-section'>
               <button
-                class='shuffle-deck-button button'
-                onClick={() => ShuffleDeck()}
-              >
-                Shuffle Deck
+                className='shuffle-deck-button button'
+                onClick={() => ShuffleDeck()}  
+                // Question: Why is an anon function being used here? 
+              >Shuffle Deck
               </button>
-              <button class='deal-cards-button button'>Deal Cards</button>
+
+              <button className='deal-cards-button button' onClick={() => DealCards()} >Deal Cards</button>
             </section>
 
-            <section class='hit-stand-section'>
-              <button class='hit-button button'>Hit</button>
-              <button class='stand-button button'>Stand</button>
+            <section className='hit-stand-section'>
+              <button className='hit-button button'>Hit</button>
+              <button className='stand-button button'>Stand</button>
             </section>
           </section>
 
           {/* <!-- Player Area --> */}
-          <section class='all-players-section'>
-            <section class='player-1-section player'>
+          <section className='all-players-section'>
+            <section className='player-1-section player'>
               Player 1
               <input
                 type='text'
-                class='player-1-input '
+                className='player-1-input '
                 placeholder='Enter Your Name'
               />
-              <p class='player-1-cards'></p>
-              <button class='player-1-show-cards-button button'>
+              <p className='player-1-cards'></p>
+              <button className='player-1-show-cards-button button'>
                 Show Cards
               </button>
             </section>
 
-            <section class='player-house-section player'>
+            <section className='player-house-section player'>
               House
-              <p class='player-house-cards'></p>
-              <button class='player-house-show-cards-button button'>
+              <p className='player-house-cards'></p>
+              <button className='player-house-show-cards-button button'>
                 Show Cards
               </button>
             </section>
 
-            <section class='player-2-section player'>
+            {/* <section className='player-2-section player'>
               Player 2
               <input
                 type='text'
-                class='player-2-input '
+                className='player-2-input '
                 placeholder='Enter Your Name'
               />
-              <p class='player-2-cards'></p>
-              <button class='player-2-show-cards-button button'>
+              <p className='player-2-cards'></p>
+              <button className='player-2-show-cards-button button'>
                 Show Cards
               </button>
-            </section>
+              
+            </section> */}
           </section>
         </main>
         {/* <!-- Bottom of page --> */}
         <footer>
-          <p class='footer-p'>
+          <p className='footer-p'>
             copyright © Grandmaison: 31yr Before Singularity. All information is
             serial
           </p>
