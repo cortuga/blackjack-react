@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react"
-import ShuffleDeck from "./components/ShuffleDeck"
+// import Toggle from "./components/Toggle"
 
 const App = () => {
   const [deck, setDeck] = useState([])
@@ -42,6 +42,7 @@ const App = () => {
     }
     setDeck(deck)
     console.log("Deck Created", deck);
+    // On the deal or in the JSX evaluation the player will have both cards displayed but the house will have only one card displayed. House must keep playing until 18 value or higher is obtained. 
   }
 
   const ShuffleDeck = () => {
@@ -73,6 +74,10 @@ const App = () => {
       console.log("User Hand 1", userHandOne)
       console.log("User Hand 2", userHandTwo)
       console.log("House Hand", houseHand)
+  }
+
+  const HandleShowCards = e => {
+    
   }
 
   useEffect(() => {
@@ -124,9 +129,10 @@ const App = () => {
             <section className='player-house-section player'>
               House
               <p className='player-house-cards'></p>
-              <button className='player-house-show-cards-button button'>
+              {/* <button className='player-house-show-cards-button button'>
                 Show Cards
-              </button>
+              </button> */}
+              
             </section>
 
             {/* <section className='player-2-section player'>
