@@ -12,6 +12,7 @@ const App = () => {
   const [houseTotal, setHouseTotal] = useState(0)
 
   const createDeck = () => {
+    //Creates on
     // const deck = []
     const suits = ["hearts", "clubs", "spades", "diamonds"]
     const values = [
@@ -40,45 +41,44 @@ const App = () => {
         })
       }
     }
-    setDeck(deck)
-    console.log("Deck Created", deck);
-    // On the deal or in the JSX evaluation the player will have both cards displayed but the house will have only one card displayed. House must keep playing until 18 value or higher is obtained. 
+    setDeck([...deck])
+    console.log("Deck Created", deck)
+    // On the deal or in the JSX evaluation the player will have both cards displayed but the house will have only one card displayed. House must keep playing until 18 value or higher is obtained.
   }
 
   const ShuffleDeck = () => {
-      for (let i = 0; i < deck.length; i++) {
-        //now gen a floored num
-        //then swap deck[i] with deck[rando]
-        let randomNum = Math.floor(Math.random() * i + 1)
-        let temp = deck[i]
-        deck[i] = deck[randomNum]
-        deck[randomNum] = temp
-        // console.log("deck[i] =>", deck[i]);
-        // console.log(randomNum);
-      }
-      console.log("Deck Shuffled", deck)
+    for (let i = 0; i < deck.length; i++) {
+      //now gen a floored num
+      //then swap deck[i] with deck[rando]
+      let randomNum = Math.floor(Math.random() * i + 1)
+      let temp = deck[i]
+      deck[i] = deck[randomNum]
+      deck[randomNum] = temp
+      // console.log("deck[i] =>", deck[i]);
+      // console.log(randomNum);
+    }
+    console.log("Deck Shuffled", deck)
+    setDeck([...deck])
   }
 
   const DealCards = () => {
-      for (let i = 0; i < 2; i++) {
-        userHandOne.push(deck[i])
-        deck.pop(deck[i])
-        userHandTwo.push(deck[i + 2])
-        deck.pop(deck[i + 2])
-        houseHand.push(deck[i + 4])
-        deck.pop(deck[i + 4])
-      }
-      setUserHandOne(userHandOne)
-      setUserHandTwo(userHandTwo)
-      setHouseHand(houseHand)
-      console.log("User Hand 1", userHandOne)
-      console.log("User Hand 2", userHandTwo)
-      console.log("House Hand", houseHand)
+    for (let i = 0; i < 2; i++) {
+      userHandOne.push(deck[i])
+      deck.pop(deck[i])
+      userHandTwo.push(deck[i + 2])
+      deck.pop(deck[i + 2])
+      houseHand.push(deck[i + 4])
+      deck.pop(deck[i + 4])
+    }
+    setUserHandOne([...userHandOne])
+    setUserHandTwo(userHandTwo)
+    setHouseHand(houseHand)
+    console.log("User Hand 1", userHandOne)
+    console.log("User Hand 2", userHandTwo)
+    console.log("House Hand", houseHand)
   }
 
-  const HandleShowCards = e => {
-    
-  }
+  const HandleShowCards = e => {}
 
   useEffect(() => {
     createDeck()
@@ -97,12 +97,18 @@ const App = () => {
             <section className='deck-buttons-section'>
               <button
                 className='shuffle-deck-button button'
-                onClick={() => ShuffleDeck()}  
-                // Question: Why is an anon function being used here? 
-              >Shuffle Deck
+                onClick={() => ShuffleDeck()}
+                // Question: Why is an anon function being used here?
+              >
+                Shuffle Deck
               </button>
 
-              <button className='deal-cards-button button' onClick={() => DealCards()} >Deal Cards</button>
+              <button
+                className='deal-cards-button button'
+                onClick={() => DealCards()}
+              >
+                Deal Cards
+              </button>
             </section>
 
             <section className='hit-stand-section'>
@@ -124,6 +130,17 @@ const App = () => {
               <button className='player-1-show-cards-button button'>
                 Show Cards
               </button>
+              <ul>
+                {userHandOne.map((card, i) => {
+                  return (
+                    <li key={i}>
+                      {" "}
+                      {card.suit} of {card.rank}
+                    </li>
+                  )
+                })}
+              </ul>
+              {/* ?????????^^^^^^^^ */}
             </section>
 
             <section className='player-house-section player'>
@@ -132,7 +149,6 @@ const App = () => {
               {/* <button className='player-house-show-cards-button button'>
                 Show Cards
               </button> */}
-              
             </section>
 
             {/* <section className='player-2-section player'>
@@ -151,6 +167,15 @@ const App = () => {
           </section>
         </main>
         {/* <!-- Bottom of page --> */}
+        {/* <ul>
+          {deck.map(card => {
+            return (
+              <li>
+                {card.suit} of {card.rank}
+              </li>
+            )
+          })}
+        </ul> */}
         <footer>
           <p className='footer-p'>
             copyright © Grandmaison: 31yr Before Singularity. All information is
