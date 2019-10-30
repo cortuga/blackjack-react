@@ -1,6 +1,8 @@
 import React, { Component, useState, useEffect } from "react"
 // import Toggle from "./components/Toggle"
 
+// Functions, Hit, Stand, Double, Split
+
 const App = () => {
   const [deck, setDeck] = useState([])
   const [userHandOne, setUserHandOne] = useState([])
@@ -127,9 +129,9 @@ const App = () => {
                 placeholder='Enter Your Name'
               />
               <p className='player-1-cards'></p>
-              <button className='player-1-show-cards-button button'>
+              {/* <button className='player-1-show-cards-button button'>
                 Show Cards
-              </button>
+              </button> */}
               <ul>
                 {userHandOne.map((card, i) => {
                   return (
@@ -149,6 +151,15 @@ const App = () => {
               {/* <button className='player-house-show-cards-button button'>
                 Show Cards
               </button> */}
+              <ul>
+                {houseHand.map((card, i) => {
+                  return (
+                    <li kay={i}>
+                      {card.suit} of {card.rank}
+                    </li>
+                  )
+                })}
+              </ul>
             </section>
 
             {/* <section className='player-2-section player'>
