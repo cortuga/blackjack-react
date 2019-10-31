@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from "react"
+import { PassThrough } from "stream"
 // import Toggle from "./components/Toggle"
 
 // Functions, Hit, Stand, Double, Split
@@ -80,7 +81,16 @@ const App = () => {
     console.log("House Hand", houseHand)
   }
 
-  const HandleShowCards = e => {}
+  const Hit = () => {
+    userHandOne.push(deck[0])
+    deck.pop(deck[0])
+  }
+
+  // const Stand = () => {
+  //   pass
+  // }
+
+  // How to determine round being played? House will check for conditionals under 18 to hit or stay.
 
   useEffect(() => {
     createDeck()
@@ -114,7 +124,9 @@ const App = () => {
             </section>
 
             <section className='hit-stand-section'>
-              <button className='hit-button button'>Hit</button>
+              <button className='hit-button button' onClick={() => Hit()}>
+                Hit
+              </button>
               <button className='stand-button button'>Stand</button>
             </section>
           </section>
@@ -154,7 +166,7 @@ const App = () => {
               <ul>
                 {houseHand.map((card, i) => {
                   return (
-                    <li kay={i}>
+                    <li kay={0}>
                       {card.suit} of {card.rank}
                     </li>
                   )
