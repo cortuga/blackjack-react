@@ -2,6 +2,59 @@ import React, { Component, useState, useEffect } from "react"
 import { PassThrough } from "stream"
 // import Toggle from "./components/Toggle"
 
+// import aceSpades from "../Images/ace_of_spades.svg"
+// import twoSpades from "../Images/2_of_spades.svg"
+// import threeSpades from "../Images/3_of_spades.svg"
+// import fourSpades from "../Images/4_of_spades.svg"
+// import fiveSpades from "../Images/5_of_clubs.svg"
+// import sixSpades from "../Images/6_of_spades.svg"
+// import sevenSpades from "../Images/7_of_spades.svg"
+// import eightSpades from "../Images/8_of_spades.svg"
+// import nineSpades from "../Images/9_of_spades.svg"
+// import tenSpades from "../Images/10_of_spades.svg"
+// import jackSpades from "../Images/jack_of_spades.svg"
+// import queenSpades from "../Images/queen_of_spades.svg"
+// import kingSpades from "../Images/king_of_spades.svg"
+// import aceHearts from "../Images/ace_of_hearts.svg"
+// import twoHearts from "../Images/2_of_hearts.svg"
+// import threeHearts from "../Images/3_of_hearts.svg"
+// import fourHearts from "../Images/4_of_hearts.svg"
+// import fiveHearts from "../Images/5_of_hearts.svg"
+// import sixHearts from "../Images/6_of_hearts.svg"
+// import sevenHearts from "../Images/7_of_hearts.svg"
+// import eightHearts from "../Images/8_of_hearts.svg"
+// import nineHearts from "../Images/9_of_hearts.svg"
+// import tenHearts from "../Images/10_of_hearts.svg"
+// import jackHearts from "../Images/jack_of_hearts.svg"
+// import queenHearts from "../Images/queen_of_hearts.svg"
+// import kingHearts from "../Images/king_of_hearts.svg"
+// import aceClubs from "../Images/ace_of_clubs.svg"
+// import twoClubs from "../Images/2_of_clubs.svg"
+// import threeClubs from "../Images/3_of_clubs.svg"
+// import fourClubs from "../Images/4_of_clubs.svg"
+// import fiveClubs from "../Images/5_of_clubs.svg"
+// import sixClubs from "../Images/6_of_clubs.svg"
+// import sevenClubs from "../Images/7_of_clubs.svg"
+// import eightClubs from "../Images/8_of_clubs.svg"
+// import nineClubs from "../Images/9_of_clubs.svg"
+// import tenClubs from "../Images/10_of_clubs.svg"
+// import jackClubs from "../Images/jack_of_clubs.svg"
+// import queenClubs from "../Images/queen_of_clubs.svg"
+// import kingClubs from "../Images/king_of_clubs.svg"
+// import aceDiamonds from "../Images/ace_of_diamonds.svg"
+// import twoDiamonds from "../Images/2_of_diamonds.svg"
+// import threeDiamonds from "../Images/3_of_diamonds.svg"
+// import fourDiamonds from "../Images/4_of_diamonds.svg"
+// import fiveDiamonds from "../Images/5_of_diamonds.svg"
+// import sixDiamonds from "../Images/6_of_diamonds.svg"
+// import sevenDiamonds from "../Images/7_of_diamonds.svg"
+// import eightDiamonds from "../Images/8_of_diamonds.svg"
+// import nineDiamonds from "../Images/9_of_diamonds.svg"
+// import tenDiamonds from "../Images/10_of_diamonds.svg"
+// import jackDiamonds from "../Images/jack_of_diamonds.svg"
+// import queenDiamonds from "../Images/queen_of_diamonds.svg"
+// import kingDiamonds from "../Images/king_of_diamonds.svg"
+
 // Functions, Hit, Stand, Double, Split
 
 const App = () => {
@@ -82,8 +135,11 @@ const App = () => {
   }
 
   const Hit = () => {
-    userHandOne.push(deck[0])
-    deck.pop(deck[0])
+    for (let i = 0; i < 1; i++) {
+      userHandOne.push(deck[i])
+      deck.pop(deck[0])
+    }
+    setUserHandTwo(...userHandOne)
   }
 
   // const Stand = () => {
