@@ -63,6 +63,10 @@ const App = () => {
   const [userHandTwo, setUserHandTwo] = useState([])
   const [houseHand, setHouseHand] = useState([])
 
+  const [evaluationOne, setEvaluationOne] = useState([])
+  const [evaluationTwo, setEvaluationTwo] = useState([])
+  const [evaluationThree, setEvaluationThree] = useState([])
+
   const [handOneTotal, setHandOneTotal] = useState(0)
   const [handTwoTotal, setHandTwoTotal] = useState(0)
   const [houseTotal, setHouseTotal] = useState(0)
@@ -146,6 +150,16 @@ const App = () => {
   //   pass
   // }
 
+  const PlayerTotal = () => {
+    return userHandOne.reduce((a, c) => {
+      
+    })
+  }
+
+  const HouseTotal = () => [
+
+  ]
+
   // How to determine round being played? House will check for conditionals under 18 to hit or stay.
 
   useEffect(() => {
@@ -162,6 +176,8 @@ const App = () => {
             <h1 className='blackjack'>Blackjack</h1>
             <img alt='something' src='.\assets\background\black_card.jpeg' />
 
+
+            {/* <!-- Choices Area --> */}
             <section className='deck-buttons-section'>
               <button
                 className='shuffle-deck-button button'
@@ -187,7 +203,8 @@ const App = () => {
             </section>
           </section>
 
-          {/* <!-- Player Area --> */}
+
+          {/* <!-- Player/Hand Area --> */}
           <section className='all-players-section'>
             <section className='player-1-section player'>
               Player 1
@@ -205,7 +222,7 @@ const App = () => {
                   return (
                     <li key={i}>
                       {" "}
-                      {card.suit} of {card.rank}
+                      {card.rank} of {card.suit}
                     </li>
                   )
                 })}
@@ -222,8 +239,8 @@ const App = () => {
               <ul>
                 {houseHand.map((card, i) => {
                   return (
-                    <li kay={0}>
-                      {card.suit} of {card.rank}
+                    <li kay={i}>
+                      {card.rank} of {card.suit}
                     </li>
                   )
                 })}
