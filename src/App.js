@@ -63,17 +63,16 @@ const App = () => {
   const [userHandTwo, setUserHandTwo] = useState([])
   const [houseHand, setHouseHand] = useState([])
 
-  const [evaluationOne, setEvaluationOne] = useState([])
-  const [evaluationTwo, setEvaluationTwo] = useState([])
+  const [evaluationPlayer, setEvaluationPlayer] = useState([])
+  const [evaluationHouse, setEvaluationHouse] = useState([])
   const [evaluationThree, setEvaluationThree] = useState([])
 
   const [handOneTotal, setHandOneTotal] = useState(0)
-  const [handTwoTotal, setHandTwoTotal] = useState(0)
+  // const [handTwoTotal, setHandTwoTotal] = useState(0)
   const [houseTotal, setHouseTotal] = useState(0)
 
   const createDeck = () => {
     //Creates on
-    // const deck = []
     const suits = ["hearts", "clubs", "spades", "diamonds"]
     const values = [
       { name: "ace", value: 11 },
@@ -103,7 +102,7 @@ const App = () => {
     }
     setDeck([...deck])
     console.log("Deck Created", deck)
-    // On the deal or in the JSX evaluation the player will have both cards displayed but the house will have only one card displayed. House must keep playing until 18 value or higher is obtained.
+    // On the deal or in the JSX evaluation the player will have both cards displayed but the house will have only one card displayed. House must keep playing until 16 value or higher is obtained.
   }
 
   const ShuffleDeck = () => {
@@ -136,29 +135,49 @@ const App = () => {
     console.log("User Hand 1", userHandOne)
     console.log("User Hand 2", userHandTwo)
     console.log("House Hand", houseHand)
+
+    HouseTotal()
   }
 
   const Hit = () => {
+    const newDeck
     for (let i = 0; i < 1; i++) {
       userHandOne.push(deck[i])
       deck.pop(deck[0])
     }
-    setUserHandTwo(...userHandOne)
+    setUserHandOne([...userHandOne])
+    PlayerTotal()
   }
 
-  // const Stand = () => {
-  //   pass
-  // }
+  const Stay = () => {
+    if (houseTotal < 16) {
+      Hit
+    }
+  }
+
+
 
   const PlayerTotal = () => {
-    return userHandOne.reduce((a, c) => {
-      
+    const total = userHandOne.map(card => {
+      return card.number
     })
+    const newTotal = total.reduce((a, c) => {
+      return a + c
+    })
+    setHandOneTotal(newTotal)
+    console.log("PLayer Hand Total", newTotal)
   }
 
-  const HouseTotal = () => [
-
-  ]
+  const HouseTotal = () => {
+    const total = houseHand.map(card => {
+      return card.number
+    })
+    const newTotal = total.reduce((a, c) => {
+      return a + c
+    })
+    setHouseTotal(newTotal)
+    console.log("House Total", newTotal)
+  }
 
   // How to determine round being played? House will check for conditionals under 18 to hit or stay.
 
@@ -175,7 +194,6 @@ const App = () => {
           <section className='top-section'>
             <h1 className='blackjack'>Blackjack</h1>
             <img alt='something' src='.\assets\background\black_card.jpeg' />
-
 
             {/* <!-- Choices Area --> */}
             <section className='deck-buttons-section'>
@@ -199,10 +217,9 @@ const App = () => {
               <button className='hit-button button' onClick={() => Hit()}>
                 Hit
               </button>
-              <button className='stand-button button'>Stand</button>
+              <button className='stand-button button'>Stay</button>
             </section>
           </section>
-
 
           {/* <!-- Player/Hand Area --> */}
           <section className='all-players-section'>
@@ -226,8 +243,12 @@ const App = () => {
                     </li>
                   )
                 })}
+                <section>
+                  <ul>
+                    <li>PlayerTotal = {handOneTotal}</li>
+                  </ul>
+                </section>
               </ul>
-              {/* ?????????^^^^^^^^ */}
             </section>
 
             <section className='player-house-section player'>
