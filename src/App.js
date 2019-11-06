@@ -137,25 +137,30 @@ const App = () => {
     console.log("House Hand", houseHand)
 
     HouseTotal()
-  }
-
-  const Hit = () => {
-    const newDeck
-    for (let i = 0; i < 1; i++) {
-      userHandOne.push(deck[i])
-      deck.pop(deck[0])
-    }
-    setUserHandOne([...userHandOne])
     PlayerTotal()
   }
 
-  const Stay = () => {
-    if (houseTotal < 16) {
-      Hit
+  const Hit = (key, setKey) => {
+    for (let i = 0; i < 1; i++) {
+      const card = deck.pop()
+      key.push(card)
     }
+    setKey([...key])
+    PlayerTotal()
+    HouseTotal()
   }
 
+  const Stay = () => {
+    HouseTotal()
+    if (houseTotal <= 16) {
+      Hit(houseHand, setHouseHand)
+      // Evaluate()
 
+      console.log(houseTotal, "House Total")
+    } else {
+      // Evaluate()
+    }
+  }
 
   const PlayerTotal = () => {
     const total = userHandOne.map(card => {
@@ -214,10 +219,15 @@ const App = () => {
             </section>
 
             <section className='hit-stand-section'>
-              <button className='hit-button button' onClick={() => Hit()}>
+              <button
+                className='hit-button button'
+                onClick={() => Hit(userHandOne, setUserHandOne)}
+              >
                 Hit
               </button>
-              <button className='stand-button button'>Stay</button>
+              <button className='stand-button button' onClick={() => Stay()}>
+                Stay
+              </button>
             </section>
           </section>
 
@@ -265,6 +275,11 @@ const App = () => {
                     </li>
                   )
                 })}
+                <section>
+                  <ul>
+                    <li>House Total = {houseTotal}</li>
+                  </ul>
+                </section>
               </ul>
             </section>
 
