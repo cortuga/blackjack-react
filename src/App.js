@@ -154,12 +154,17 @@ const App = () => {
     HouseTotal()
     if (houseTotal <= 16) {
       Hit(houseHand, setHouseHand)
-      // Evaluate()
-
+      Stay()
       console.log(houseTotal, "House Total")
     } else {
       // Evaluate()
     }
+  }
+
+  const Evaluate = () => {
+    HouseTotal()
+    PlayerTotal()
+    if (houseTotal > )
   }
 
   const PlayerTotal = () => {
