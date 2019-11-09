@@ -178,6 +178,9 @@ const App = () => {
     } else if (houseTotal === 21 && handOneTotal === 21) {
       console.log("Stalemate, PUSH, Draw")
       // make else if to check house hand being under 16 again.
+    }else if () {
+
+    }
     }
   }
 
