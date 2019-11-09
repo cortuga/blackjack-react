@@ -1,6 +1,5 @@
 import React, { Component, useState, useEffect } from "react"
 import { PassThrough } from "stream"
-import { writeHeapSnapshot } from "v8"
 // import Toggle from "./components/Toggle"
 
 // import aceSpades from "../Images/ace_of_spades.svg"
@@ -156,20 +155,25 @@ const App = () => {
     if (houseTotal <= 16) {
       Hit(houseHand, setHouseHand)
       // Stay()
-      console.log(houseTotal, "House Total")
+      console.log("House Hits", "House total is", houseTotal)
     } else {
-      Evaluate()
+      Evaluate() // Eval end game(house against player)
     }
   }
 
   const Evaluate = () => {
     HouseTotal()
     PlayerTotal()
-    if (houseTotal > handOneTotal) {
+    // reEval
+    if (houseTotal <= 16) {
+      Hit(houseHand, setHouseHand)
+      console.log("House Hits again", houseTotal)
+      // WIN
+    } else if (houseTotal > handOneTotal) {
       console.log("House Wins!")
     } else if (handOneTotal > houseTotal) {
       console.log("Player Wins!")
-      // BUST statements
+       // BUST
     } else if (houseTotal > 21) {
       console.log("Player Wins, Dealer Busts!")
     } else if (houseTotal > 21) {
@@ -177,11 +181,9 @@ const App = () => {
       // DRAW
     } else if (houseTotal === 21 && handOneTotal === 21) {
       console.log("Stalemate, PUSH, Draw")
-      // make else if to check house hand being under 16 again.
-    }else if () {
 
     }
-    }
+    
   }
 
   const PlayerTotal = () => {
