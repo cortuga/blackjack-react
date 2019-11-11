@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect } from "react"
-import { PassThrough } from "stream"
+import React, { useState, useEffect } from "react"
+// import { PassThrough } from "stream"
 // import Toggle from "./components/Toggle"
 
 // import aceSpades from "../Images/ace_of_spades.svg"
@@ -63,16 +63,11 @@ const App = () => {
   const [userHandTwo, setUserHandTwo] = useState([])
   const [houseHand, setHouseHand] = useState([])
 
-  const [evaluationPlayer, setEvaluationPlayer] = useState([])
-  const [evaluationHouse, setEvaluationHouse] = useState([])
-  const [evaluationThree, setEvaluationThree] = useState([])
-
   const [handOneTotal, setHandOneTotal] = useState(0)
   // const [handTwoTotal, setHandTwoTotal] = useState(0)
   const [houseTotal, setHouseTotal] = useState(0)
 
   const createDeck = () => {
-    //Creates on
     const suits = ["hearts", "clubs", "spades", "diamonds"]
     const values = [
       { name: "ace", value: 11 },
@@ -101,8 +96,8 @@ const App = () => {
       }
     }
     setDeck([...deck])
-    console.log("Deck Created", deck)
-    // On the deal or in the JSX evaluation the player will have both cards displayed but the house will have only one card displayed. House must keep playing until 16 value or higher is obtained.
+    // console.log("Created Deck", deck)
+    // 1 card of house displayed, .
   }
 
   const ShuffleDeck = () => {
@@ -116,7 +111,7 @@ const App = () => {
       // console.log("deck[i] =>", deck[i]);
       // console.log(randomNum);
     }
-    console.log("Deck Shuffled", deck)
+    // console.log("Deck Shuffled", deck)
     setDeck([...deck])
   }
 
@@ -133,7 +128,7 @@ const App = () => {
     setUserHandTwo(userHandTwo)
     setHouseHand(houseHand)
     console.log("User Hand 1", userHandOne)
-    console.log("User Hand 2", userHandTwo)
+    // console.log("User Hand 2", userHandTwo)
     console.log("House Hand", houseHand)
 
     HouseTotal()
@@ -147,44 +142,51 @@ const App = () => {
     }
     setKey([...key])
     PlayerTotal()
-    HouseTotal()
+    // if (handOneTotal > 21) {
+    //   console.log("Player BUSTS (hit)", handOneTotal)
+    // }
+    PreEvalBust()
+    // HouseTotal()
   }
+
+  const PreEvalBust = () => {
+    // PlayerTotal()
+    if (handOneTotal >= 22) {
+      console.log("Player BUSTS (preEval)", handOneTotal)
+    }
+  }  
+
 
   const Stay = () => {
     HouseTotal()
     if (houseTotal <= 16) {
       Hit(houseHand, setHouseHand)
-      // Stay()
-      console.log("House Hits", "House total is", houseTotal)
+      console.log("House Hits and total is", houseTotal)
+      Stay() // Recursive call if houseTotal still under 16
+    } else if (houseTotal > 16 && houseTotal < 22) {
+      EvaluateEndGame()
     } else {
-      Evaluate() // Eval end game(house against player)
+      console.log("House BUSTS")
     }
-  }
+}
 
-  const Evaluate = () => {
-    HouseTotal()
-    PlayerTotal()
-    // reEval
-    if (houseTotal <= 16) {
-      Hit(houseHand, setHouseHand)
-      console.log("House Hits again", houseTotal)
-      // WIN
-    } else if (houseTotal > handOneTotal) {
-      console.log("House Wins!")
-    } else if (handOneTotal > houseTotal) {
-      console.log("Player Wins!")
-       // BUST
-    } else if (houseTotal > 21) {
-      console.log("Player Wins, Dealer Busts!")
-    } else if (houseTotal > 21) {
-      console.log("Dealer writeHeapSnapshot, Player BUSTS!")
-      // DRAW
+  const EvaluateEndGame = () => {
+    //   // BUST
+    //   if (houseTotal > 21) {
+    //   console.log("Player Wins, Dealer Busts!")
+    // } else if (handOneTotal > 21) {
+    //   console.log("Dealer Wins, Player BUSTS!")
+      // WIN, <21
+    if (houseTotal > handOneTotal && houseTotal < 22) {
+        console.log("House Wins!")
+    } else if (handOneTotal > houseTotal && handOneTotal < 22) {
+        console.log("Player Wins!")
+        // DRAW
     } else if (houseTotal === 21 && handOneTotal === 21) {
-      console.log("Stalemate, PUSH, Draw")
-
-    }
-    
+        console.log("Stalemate, PUSH, Draw")
+      }
   }
+
 
   const PlayerTotal = () => {
     const total = userHandOne.map(card => {
@@ -195,6 +197,7 @@ const App = () => {
     })
     setHandOneTotal(newTotal)
     console.log("PLayer Hand Total", newTotal)
+    PreEvalBust()
   }
 
   const HouseTotal = () => {
@@ -333,10 +336,9 @@ const App = () => {
           })}
         </ul> */}
         <footer>
-          <p className='footer-p'>
-            copyright © Grandmaison: 31yr Before Singularity. All information is
-            serial
-          </p>
+          <span className='footer-p'>
+            Made with <span role="img">💛</span> at SDG
+          </span>
         </footer>
       </>
     </div>
