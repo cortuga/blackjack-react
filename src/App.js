@@ -338,7 +338,7 @@ const App = () => {
               <ul>
                 {houseHand.map((card, i) => {
                   return (
-                    <li kay={0}>
+                    <li kay={i}>
                       {card.rank} of {card.suit}
                     </li>
                   )
