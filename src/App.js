@@ -151,7 +151,7 @@ const App = () => {
 
   const PreEvalBust = () => {
     // PlayerTotal()
-    if (handOneTotal = 22) {
+    if (handOneTotal === 22) {
       console.log("Player BUSTS (preEval)", handOneTotal)
     } else if (handOneTotal > 22) {
       console.log("Player BUSTS (preEval)", handOneTotal)
@@ -164,7 +164,7 @@ const App = () => {
     if (houseTotal <= 16) {
       Hit(houseHand, setHouseHand)
       HouseTotal()
-      console.log("House Hits and total is", houseTotal)
+      console.log("(Stay) House Hits and total is", houseTotal)
       // Stay() // Recursive call if houseTotal still under 16
     } else if (houseTotal > 16 && houseTotal < 22) {
       EvaluateEndGame()
@@ -213,7 +213,7 @@ const App = () => {
       return a + c
     })
     setHouseTotal(newTotal)
-    console.log("House Total", newTotal)
+    console.log("(HTF) House Total is", newTotal)
   }
 
   // How to determine round being played? House will check for conditionals under 18 to hit or stay.
