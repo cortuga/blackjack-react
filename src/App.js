@@ -151,7 +151,9 @@ const App = () => {
 
   const PreEvalBust = () => {
     // PlayerTotal()
-    if (handOneTotal >= 22) {
+    if (handOneTotal = 22) {
+      console.log("Player BUSTS (preEval)", handOneTotal)
+    } else if (handOneTotal > 22) {
       console.log("Player BUSTS (preEval)", handOneTotal)
     }
   }  
@@ -161,8 +163,9 @@ const App = () => {
     HouseTotal()
     if (houseTotal <= 16) {
       Hit(houseHand, setHouseHand)
+      HouseTotal()
       console.log("House Hits and total is", houseTotal)
-      Stay() // Recursive call if houseTotal still under 16
+      // Stay() // Recursive call if houseTotal still under 16
     } else if (houseTotal > 16 && houseTotal < 22) {
       EvaluateEndGame()
     } else {
@@ -176,6 +179,7 @@ const App = () => {
     //   console.log("Player Wins, Dealer Busts!")
     // } else if (handOneTotal > 21) {
     //   console.log("Dealer Wins, Player BUSTS!")
+
       // WIN, <21
     if (houseTotal > handOneTotal && houseTotal < 22) {
         console.log("House Wins!")
@@ -183,8 +187,10 @@ const App = () => {
         console.log("Player Wins!")
         // DRAW
     } else if (houseTotal === 21 && handOneTotal === 21) {
-        console.log("Stalemate, PUSH, Draw")
-      }
+        console.log("21, Stalemate, PUSH, Draw")
+    } else if (houseTotal === handOneTotal) {
+      console.log("PUSH")
+    }
   }
 
 
@@ -197,7 +203,6 @@ const App = () => {
     })
     setHandOneTotal(newTotal)
     console.log("PLayer Hand Total", newTotal)
-    PreEvalBust()
   }
 
   const HouseTotal = () => {
@@ -297,7 +302,7 @@ const App = () => {
               <ul>
                 {houseHand.map((card, i) => {
                   return (
-                    <li kay={i}>
+                    <li kay={0}>
                       {card.rank} of {card.suit}
                     </li>
                   )
