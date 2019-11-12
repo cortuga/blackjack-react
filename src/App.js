@@ -83,14 +83,14 @@ const App = () => {
 
   useEffect(() => {
     //Setting House Total
+    console.log("House hand was updated")
     const total = houseHand.map(card => {
       return card.number
     })
     const newTotal = total.reduce((a, c) => {
       return a + c
-    })
+    }, 0)
     setHouseTotal(newTotal)
-    console.log("(HTF) House Total is", newTotal)
   }, [houseHand])
 
   const createDeck = () => {
@@ -230,21 +230,20 @@ const App = () => {
   }
 
   const HouseTotal = () => {
-    const total = houseHand.map(card => {
-      return card.number
-    })
-    const newTotal = total.reduce((a, c) => {
-      return a + c
-    })
-    setHouseTotal(newTotal)
-    console.log("(HTF) House Total is", newTotal)
+    // const total = houseHand.map(card => {
+    //   return card.number
+    // })
+    // const newTotal = total.reduce((a, c) => {
+    //   return a + c
+    // })
+    // setHouseTotal(newTotal)
+    // console.log("(HTF) House Total is", newTotal)
   }
 
   // How to determine round being played? House will check for conditionals under 18 to hit or stay.
 
   useEffect(() => {
     createDeck()
-    // ShuffleDeck()
   }, [])
 
   const PlayAgain = () => {
