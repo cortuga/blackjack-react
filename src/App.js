@@ -67,6 +67,32 @@ const App = () => {
   // const [handTwoTotal, setHandTwoTotal] = useState(0)
   const [houseTotal, setHouseTotal] = useState(0)
 
+  const [playerTotal, setPlayerTotal] = useState(0)
+
+  useEffect(() => {
+    // Setting Player Total
+    console.log("player hand was updated")
+    const total = userHandOne.map(card => {
+      return card.number
+    })
+    const newTotal = total.reduce((a, c) => {
+      return a + c
+    }, 0)
+    setPlayerTotal(newTotal)
+  }, [userHandOne])
+
+  useEffect(() => {
+    //Setting House Total
+    const total = houseHand.map(card => {
+      return card.number
+    })
+    const newTotal = total.reduce((a, c) => {
+      return a + c
+    })
+    setHouseTotal(newTotal)
+    console.log("(HTF) House Total is", newTotal)
+  }, [houseHand])
+
   const createDeck = () => {
     const suits = ["hearts", "clubs", "spades", "diamonds"]
     const values = [
@@ -156,8 +182,7 @@ const App = () => {
     } else if (handOneTotal > 22) {
       console.log("Player BUSTS (preEval)", handOneTotal)
     }
-  }  
-
+  }
 
   const Stay = () => {
     HouseTotal()
@@ -171,7 +196,7 @@ const App = () => {
     } else {
       console.log("House BUSTS")
     }
-}
+  }
 
   const EvaluateEndGame = () => {
     //   // BUST
@@ -180,29 +205,28 @@ const App = () => {
     // } else if (handOneTotal > 21) {
     //   console.log("Dealer Wins, Player BUSTS!")
 
-      // WIN, <21
+    // WIN, <21
     if (houseTotal > handOneTotal && houseTotal < 22) {
-        console.log("House Wins!")
+      console.log("House Wins!")
     } else if (handOneTotal > houseTotal && handOneTotal < 22) {
-        console.log("Player Wins!")
-        // DRAW
+      console.log("Player Wins!")
+      // DRAW
     } else if (houseTotal === 21 && handOneTotal === 21) {
-        console.log("21, Stalemate, PUSH, Draw")
+      console.log("21, Stalemate, PUSH, Draw")
     } else if (houseTotal === handOneTotal) {
       console.log("PUSH")
     }
   }
 
-
   const PlayerTotal = () => {
-    const total = userHandOne.map(card => {
-      return card.number
-    })
-    const newTotal = total.reduce((a, c) => {
-      return a + c
-    })
-    setHandOneTotal(newTotal)
-    console.log("PLayer Hand Total", newTotal)
+    // const total = userHandOne.map(card => {
+    //   return card.number
+    // })
+    // const newTotal = total.reduce((a, c) => {
+    //   return a + c
+    // })
+    // setHandOneTotal(newTotal)
+    // console.log("PLayer Hand Total", newTotal)
   }
 
   const HouseTotal = () => {
@@ -222,6 +246,14 @@ const App = () => {
     createDeck()
     // ShuffleDeck()
   }, [])
+
+  const PlayAgain = () => {
+    setUserHandOne([])
+    setUserHandTwo([])
+    setHouseHand([])
+    setHandOneTotal(0)
+    setHouseTotal(0)
+  }
 
   // setup useEffect that calls create deck and other functions upon page load
   return (
@@ -259,6 +291,11 @@ const App = () => {
               </button>
               <button className='stand-button button' onClick={() => Stay()}>
                 Stay
+              </button>
+            </section>
+            <section>
+              <button className='' onClick={PlayAgain}>
+                Play Again
               </button>
             </section>
           </section>
@@ -342,7 +379,7 @@ const App = () => {
         </ul> */}
         <footer>
           <span className='footer-p'>
-            Made with <span role="img">💛</span> at SDG
+            Made with <span role='img'>💛</span> at SDG
           </span>
         </footer>
       </>
