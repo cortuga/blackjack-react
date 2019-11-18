@@ -67,31 +67,8 @@ const App = () => {
   // const [handTwoTotal, setHandTwoTotal] = useState(0)
   const [houseTotal, setHouseTotal] = useState(0)
 
-  const [playerTotal, setPlayerTotal] = useState(0)
-
-  useEffect(() => {
-    // Setting Player Total
-    console.log("player hand was updated")
-    const total = userHandOne.map(card => {
-      return card.number
-    })
-    const newTotal = total.reduce((a, c) => {
-      return a + c
-    }, 0)
-    setPlayerTotal(newTotal)
-  }, [userHandOne])
-
-  useEffect(() => {
-    //Setting House Total
-    console.log("House hand was updated")
-    const total = houseHand.map(card => {
-      return card.number
-    })
-    const newTotal = total.reduce((a, c) => {
-      return a + c
-    }, 0)
-    setHouseTotal(newTotal)
-  }, [houseHand])
+  // const [playerTotal, setPlayerTotal] = useState(0)
+  // more descriptive, refactor and change name.
 
   const createDeck = () => {
     const suits = ["hearts", "clubs", "spades", "diamonds"]
@@ -151,7 +128,7 @@ const App = () => {
       deck.pop(deck[i + 4])
     }
     setUserHandOne([...userHandOne])
-    setUserHandTwo(userHandTwo)
+    // setUserHandTwo(userHandTwo)
     setHouseHand(houseHand)
     console.log("User Hand 1", userHandOne)
     // console.log("User Hand 2", userHandTwo)
@@ -167,13 +144,56 @@ const App = () => {
       key.push(card)
     }
     setKey([...key])
-    PlayerTotal()
-    // if (handOneTotal > 21) {
-    //   console.log("Player BUSTS (hit)", handOneTotal)
-    // }
-    PreEvalBust()
+    // PlayerTotal()
+    if (handOneTotal > 21) {
+      console.log("Player BUSTS (hit)", handOneTotal)
+    }
+    // PreEvalBust()
     // HouseTotal()
   }
+
+  useEffect(() => {
+    // checking Player Total
+    const total = userHandOne.map(card => {
+      return card.number
+    })
+    const newTotal = total.reduce((a, c) => {
+      return a + c
+    }, 0)
+    setHandOneTotal(newTotal)
+    console.log("(useEffect) player total", handOneTotal)
+
+    // if (handOneTotal > 21) {
+    //   console.log("Player BUSTS")
+    // }
+    // console.log("(useEffect) player total was updated")
+  }, [userHandOne])
+
+  useEffect(() => {
+    //checking House Total
+    const total = houseHand.map(card => {
+      return card.number
+    })
+    const newTotal = total.reduce((a, c) => {
+      return a + c
+    }, 0)
+    setHouseTotal(newTotal)
+    console.log("(useEffect) House total", houseTotal)
+    // if (houseTotal > 21) {
+    //   console.log("House BUSTS")
+    // }
+    // console.log("(useEffect) House total was updated")
+  }, [houseHand])
+
+  useEffect(
+    handOneTotal => {
+      // creating a preEval
+      if (handOneTotal > 21) {
+        console.log("Player BUSTS", handOneTotal)
+      }
+    },
+    [userHandOne]
+  )
 
   const PreEvalBust = () => {
     // PlayerTotal()
@@ -185,10 +205,10 @@ const App = () => {
   }
 
   const Stay = () => {
-    HouseTotal()
+    // HouseTotal()
     if (houseTotal <= 16) {
       Hit(houseHand, setHouseHand)
-      HouseTotal()
+      // HouseTotal()
       console.log("(Stay) House Hits and total is", houseTotal)
       // Stay() // Recursive call if houseTotal still under 16
     } else if (houseTotal > 16 && houseTotal < 22) {
@@ -199,12 +219,6 @@ const App = () => {
   }
 
   const EvaluateEndGame = () => {
-    //   // BUST
-    //   if (houseTotal > 21) {
-    //   console.log("Player Wins, Dealer Busts!")
-    // } else if (handOneTotal > 21) {
-    //   console.log("Dealer Wins, Player BUSTS!")
-
     // WIN, <21
     if (houseTotal > handOneTotal && houseTotal < 22) {
       console.log("House Wins!")
@@ -219,24 +233,24 @@ const App = () => {
   }
 
   const PlayerTotal = () => {
-    // const total = userHandOne.map(card => {
-    //   return card.number
-    // })
-    // const newTotal = total.reduce((a, c) => {
-    //   return a + c
-    // })
-    // setHandOneTotal(newTotal)
-    // console.log("PLayer Hand Total", newTotal)
+    const total = userHandOne.map(card => {
+      return card.number
+    })
+    const newTotal = total.reduce((a, c) => {
+      return a + c
+    })
+    setHandOneTotal(newTotal)
+    console.log(" (PlayerTotal func) PLayer Hand Total", handOneTotal)
   }
 
   const HouseTotal = () => {
-    // const total = houseHand.map(card => {
-    //   return card.number
-    // })
-    // const newTotal = total.reduce((a, c) => {
-    //   return a + c
-    // })
-    // setHouseTotal(newTotal)
+    const total = houseHand.map(card => {
+      return card.number
+    })
+    const newTotal = total.reduce((a, c) => {
+      return a + c
+    })
+    setHouseTotal(newTotal)
     // console.log("(HTF) House Total is", newTotal)
   }
 
