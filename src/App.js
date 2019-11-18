@@ -139,15 +139,15 @@ const App = () => {
   }
 
   const Hit = (key, setKey) => {
+    if (handOneTotal > 21) {
+      console.log("Player BUSTS (hit)", handOneTotal)
+    }
     for (let i = 0; i < 1; i++) {
       const card = deck.pop()
       key.push(card)
     }
     setKey([...key])
     // PlayerTotal()
-    if (handOneTotal > 21) {
-      console.log("Player BUSTS (hit)", handOneTotal)
-    }
     // PreEvalBust()
     // HouseTotal()
   }
@@ -163,9 +163,9 @@ const App = () => {
     setHandOneTotal(newTotal)
     console.log("(useEffect) player total", handOneTotal)
 
-    // if (handOneTotal > 21) {
-    //   console.log("Player BUSTS")
-    // }
+    if (handOneTotal > 21) {
+      console.log("Player BUSTS")
+    }
     // console.log("(useEffect) player total was updated")
   }, [userHandOne])
 
