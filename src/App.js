@@ -161,11 +161,8 @@ const App = () => {
       return a + c
     }, 0)
     setHandOneTotal(newTotal)
-    console.log("(useEffect) player total", handOneTotal)
+    console.log("(useEffect) player total", newTotal)
 
-    if (handOneTotal > 21) {
-      console.log("Player BUSTS")
-    }
     // console.log("(useEffect) player total was updated")
   }, [userHandOne])
 
@@ -352,7 +349,7 @@ const App = () => {
               <ul>
                 {houseHand.map((card, i) => {
                   return (
-                    <li kay={i}>
+                    <li key={i}>
                       {card.rank} of {card.suit}
                     </li>
                   )
